@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script src="jquery-3.1.0.js"></script>
+	<title>轮播图</title>
+	<!--公共的样式写到一个公用的样式表里面，引用到不同的文档中-->
+	<!--base.css-->
+	<style type="text/css">
+	
+	ul,li{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.content{
+		width: 520px;
+		height: 280px;
+		margin: 0 auto;
+		position: relative;
+	}
+	.content .pic li{
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 1;
+	}
+	.content .pic li.zindex{
+		z-index: 2;
+	}
+	.content .indicator{
+		position: absolute;
+		bottom: 5px;
+		left: calc(50% - 75px);
+		z-index: 10;
+	}
+	.content .indicator li{
+		width: 20px;
+		height: 20px;
+		border-radius: 50%;
+		background-color: green;
+		float: left;
+		margin: 5px;
+		cursor: pointer;
+	}
+	.content .indicator li.active{
+		background-color: red;
+	}
+	</style>
+	
+</head>
+<body>
+<div class="content">
+	<ul class="pic">
+		<li class="zindex"><a href="#"><img src="img/1.jpg"/></a></li>
+		<li><a href="#"><img src="img/2.jpg"/></a></li>
+		<li><a href="#"><img src="img/3.jpg"/></a></li>
+		<li><a href="#"><img src="img/4.jpg"/></a></li>
+		<li><a href="#"><img src="img/5.jpg"/></a></li>
+	</ul>
+	<ul class="indicator">
+		<li class="active"></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<script type="text/javascript">
+$(function () {
+	// 开始的索引值为0，初始是第一张图
+	var index_start = 0;
+	// 结束位置
+	var index_end = $('.content .pic li').length;
+	
+	// 全局变量timer，当鼠标进来和出去时，关闭和开启定时器
+	var timer = setInterval(autoChange,1000);
+	
+	// 自动播放的方法
+	function autoChange () {
+		index_start ++;
+		
+		// 当切换到最后一张图时，返回到第一张
+		if (index_start == index_end) {
+			index_start = 0;
+		}
+		
+		console.log(index_start);
+		// 链式调用
+		$('.content .pic li')
+		.eq(index_start)//找到当前需要显示的图片
+		.addClass('zindex')
+		.siblings()//找到所有的兄弟元素
+		.removeClass('zindex');
+		
+		$('.content .indicator li')
+		.eq(index_start).addClass('active')
+		.siblings().removeClass('active');
+		
+		// if (index_start == index_end-1) {
+			// index_start = -1;	
+		// }
+		
+	}
+	
+	// 手动切换
+	$('.content .indicator li').hover(function () {
+		// 鼠标进来时，关闭定时器，自播放停止
+		clearInterval(timer);
+		
+		// index()获取当前元素的索引
+		var index = $(this).index();
+		$('.content .pic li')
+		.eq(index).addClass('zindex')
+		.siblings().removeClass('zindex');
+		
+		$('.content .indicator li')
+		.eq(index).addClass('active')
+		.siblings().removeClass('active');
+		
+	},function () {
+		// 鼠标出去时，开启定时器，开始自动播放
+		timer = setInterval(autoChange,1000);
+		// 当鼠标出去时，重新记录索引值
+		index_start = $(this).index();
+	});
+	
+	
+	
+	
+	
+});
+
+
+</script>
+
+</body>
+</html>

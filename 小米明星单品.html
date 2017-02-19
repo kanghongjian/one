@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="khj" content="">
+    <link rel="stylesheet" href="css/danpin.css">
+    <script src="js/jquery-2.0.3.js"></script>
+    <title>小米明星单品</title>
+</head>
+<body>
+   <div id="note">
+       <div class="up">
+       <h1>小米明星单品</h1>
+       <div class="up1">
+           <span class="prev"><</span>
+           <span class="next">></span>
+       </div>
+       </div>
+       <div class="star">
+            <ul>
+                <li class="active">
+                    <img src="images/dp1.png">
+                    <p>小米笔记本</p>
+                    <p>更轻更薄，像杂志一样随身携带</p>
+                    <p>3499元起</p>
+                </li>
+                <li>
+                    <img src="images/dp2.png">
+                    <p>小米电视3s 曲面</p>
+                    <p>匠心设计，最美的小米电视</p>
+                    <p>8999元</p>
+                </li>
+                <li>
+                    <img src="images/dp3.png">
+                    <p>小米移动电源2</p>
+                    <p>双向快充，高密度锂聚合物电芯</p>
+                    <p>79元</p>
+                </li>
+                <li>
+                    <img src="images/dp4.png">
+                    <p>米家骑记电助力折叠自行车</p>
+                    <p>力矩传感电助力，折叠便携设计</p>
+                    <p>2999元</p>
+                </li>
+                <li>
+                    <img src="images/dp5.png">
+                    <p>米家扫地机器人</p>
+                    <p>智能路径规划，扫得干净扫得快</p>
+                    <p>1699元</p>
+                </li>
+                <li>
+                    <img src="images/dp01.jpg">
+                    <p>米家 LED 智能台灯</p>
+                    <p>无可视频闪，亮度色温无级调节</p>
+                    <p>169元</p>
+                </li>
+                <li>
+                    <img src="images/dp02.png">
+                    <p>米家iHealth血压计</p>
+                    <p>爸妈上手就会用的智能血压计</p>
+                    <p>399元</p>
+                </li>
+                <li>
+                    <img src="images/dp03.png">
+                    <p>小米路由器3</p>
+                    <p>更快更强，不止四天线</p>
+                    <p>149元</p>
+                </li>
+                <li>
+                    <img src="images/dp04.png">
+                    <p>小米活塞耳机 清新版</p>
+                    <p>铝合金音腔，第三代平衡阻尼系统</p>
+                    <p>29元</p>
+                </li>
+                <li>
+                    <img src="images/dp05.jpg">
+                    <p>小米体重秤</p>
+                    <p>100克，喝杯水都可感知的精准</p>
+                    <p>99元</p>
+                </li>
+            </ul>
+       </div>
+   </div>
+
+</body>
+</html>
+<script>
+    $(function () {
+      $('div#note div.up1 span').on('click',function () {
+          if ($('div#note div.star ul').position().left == 0){
+              $('div#note div.star ul').stop().animate({
+                  left:'-1226px'
+              },400)
+          }else {
+              $('div#note div.star ul').stop().animate({
+                  left:'0'
+              },400)
+          }
+      })
+
+        $('div#note div.up1 span').hover(function () {
+            clearInterval(timer)
+        },function () {
+            timer = setInterval(autoImg,4000)
+        })
+
+        var timer = setInterval(autoImg,4000)
+
+        function autoImg() {
+            if ($('div#note div.star ul').position().left == 0){
+                $('div#note div.star ul').stop().animate({
+                    left:'-1226px'
+                },500)
+            }else {
+                $('div#note div.star ul').stop().animate({
+                    left:'0'
+                },500)
+            }
+        }
+
+
+
+
+
+    })
+</script>
